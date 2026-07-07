@@ -37,7 +37,8 @@ app.use((req, _res, next) => {
 });
 
 const corsOptions = {
-  origin: ["http://localhost:5174"],
+  // origin: ["http://localhost:5174"],
+  origin: ["https://morae-frontend-m4w2.vercel.app"],
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
   credentials: true,
 };

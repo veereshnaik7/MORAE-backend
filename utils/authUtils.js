@@ -30,8 +30,6 @@ export const verifyRefreshToken = (token) =>
 
 const isProduction = configuration.env === "production";
 
-
-
 export const accessTokenCookieOptions = {
   httpOnly: true,
   secure: isProduction,

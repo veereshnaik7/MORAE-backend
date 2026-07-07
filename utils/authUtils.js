@@ -1,9 +1,9 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
-import db from "../config/db.js";
+import configuration from "../config/configuration.js";
 
-const ACCESS_TOKEN_SECRET = db.JWT_SK;
-const REFRESH_TOKEN_SECRET = db.JWT_REFRESH_SK;
+const ACCESS_TOKEN_SECRET = configuration.JWT_SK;
+const REFRESH_TOKEN_SECRET = configuration.JWT_REFRESH_SK;
 
 export const hashPassword = async (password) => {
   const salt = await bcrypt.genSalt(10);

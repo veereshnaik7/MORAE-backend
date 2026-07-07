@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
-import db from "./db.js";
+import configuration from "./configuration.js";
 
 async function connectToDatabase() {
   try {
-    const connection = await mongoose.connect(db.MONGODB_URL, {
-      dbName: db.MONGODB_DATABASE,
+    const connection = await mongoose.connect(configuration.MONGODB_URL, {
+      dbName: configuration.MONGODB_DATABASE,
     });
 
     console.log("MongoDB connected successfully");

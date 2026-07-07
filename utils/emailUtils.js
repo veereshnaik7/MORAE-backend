@@ -1,12 +1,12 @@
 import nodemailer from "nodemailer";
-import db from "../config/db.js";
+import configuration from "../config/configuration.js";
 
 const createTransporter = () => {
   return nodemailer.createTransport({
-    service: db.EMAIL_SERVICE || "gmail",
+    service: configuration.EMAIL_SERVICE || "gmail",
     auth: {
-      user: db.EMAIL_USER,
-      pass: db.EMAIL_PASS,
+      user: configuration.EMAIL_USER,
+      pass: configuration.EMAIL_PASS,
     },
   });
 };

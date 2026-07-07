@@ -6,7 +6,7 @@ import { connectToDatabase } from "./config/mongoConn.js";
 import ResponseHandler from "./utils/responseHandler.js";
 
 import ip from "ip";
-import db from "./config/db.js";
+import configuration from "./config/configuration.js";
 
 import router from "./routes/index.js";
 
@@ -14,7 +14,7 @@ dotenv.config();
 
 const app = Express();
 
-const PORT = process.env.PORT || db.PORT || 3000;
+const PORT = configuration.PORT || 3000;
 
 app.use(Express.json({ limit: "50mb" }));
 app.use(Express.urlencoded({ limit: "50mb", extended: true }));

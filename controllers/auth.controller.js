@@ -73,7 +73,7 @@ class AuthController {
           email: newUser.email,
           verified: newUser.verified,
         },
-        "User registered successfully",
+        "Registration successful! Verification OTP sent to your registered email.",
         201,
       );
     } catch (error) {
@@ -108,7 +108,7 @@ class AuthController {
             email: user.email,
             verified: user.verified,
           },
-          "User already verified",
+          "User already verified try to login",
           200,
         );
       }
@@ -169,7 +169,7 @@ class AuthController {
       if (!user) {
         return ResponseHandler.sendErrorResponse(
           res,
-          "Invalid credentials",
+          "No account found with this email address. Please create a new account or try a different email.",
           401,
         );
       }
@@ -179,7 +179,7 @@ class AuthController {
       if (!isMatch) {
         return ResponseHandler.sendErrorResponse(
           res,
-          "Invalid credentials",
+          "Incorrect password. Try again or click Forgot Password to reset it.",
           401,
         );
       }
@@ -464,8 +464,6 @@ class AuthController {
       return ResponseHandler.sendErrorResponse(res, error.message, 500);
     }
   }
-
-  
 }
 
 export default AuthController;

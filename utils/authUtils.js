@@ -22,23 +22,30 @@ export const generateRefreshToken = (payload) => {
   return jwt.sign(payload, REFRESH_TOKEN_SECRET, { expiresIn: "7d" });
 };
 
-export const verifyAccessToken = (token) => jwt.verify(token, ACCESS_TOKEN_SECRET);
+export const verifyAccessToken = (token) =>
+  jwt.verify(token, ACCESS_TOKEN_SECRET);
 
 export const verifyRefreshToken = (token) =>
   jwt.verify(token, REFRESH_TOKEN_SECRET);
 
+const isProduction = configuration.env === "production";
+
+const isProduction = process.env.NODE_ENV === "production";
+
 export const accessTokenCookieOptions = {
   httpOnly: true,
-  secure: process.env.NODE_ENV === "production",
-  sameSite: "strict",
+  secure: isProduction,
+  sameSite: isProduction ? "none" : "lax",
   maxAge: 15 * 60 * 1000,
+  path: "/",
 };
 
 export const refreshTokenCookieOptions = {
   httpOnly: true,
-  secure: process.env.NODE_ENV === "production",
-  sameSite: "strict",
+  secure: isProduction,
+  sameSite: isProduction ? "none" : "lax",
   maxAge: 7 * 24 * 60 * 60 * 1000,
+  path: "/",
 };
 
 export const generateOtp = () => {

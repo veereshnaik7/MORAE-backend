@@ -30,7 +30,7 @@ export const verifyRefreshToken = (token) =>
 
 const isProduction = configuration.env === "production";
 
-const isProduction = process.env.NODE_ENV === "production";
+
 
 export const accessTokenCookieOptions = {
   httpOnly: true,

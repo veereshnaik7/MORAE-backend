@@ -34,10 +34,11 @@ export const accessTokenCookieOptions = {
   httpOnly: true,
   secure: isProduction,
   sameSite: isProduction ? "none" : "lax",
-  maxAge: 15 * 60 * 1000,
+  maxAge: 15 * 60 * 1000, 
   path: "/",
 };
 
+// test
 export const refreshTokenCookieOptions = {
   httpOnly: true,
   secure: isProduction,

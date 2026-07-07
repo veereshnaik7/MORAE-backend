@@ -49,7 +49,7 @@ app.get("/", (req, res) => {
   return ResponseHandler.sendSuccessResponse(
     res,
     null,
-    "Task Manager Main router API",
+    "Task Manager Main App",
     200,
   );
 });

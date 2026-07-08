@@ -63,7 +63,22 @@ class AuthController {
         expiresAt: new Date(Date.now() + 10 * 60 * 1000),
       });
 
-      await sendMail("verifyAccountOtp", newUser.email, { otp });
+      try {
+        await sendMail("verifyAccountOtp", newUser.email, { otp });
+      } catch (mailError) {
+        await Otp.deleteMany({
+          userId: newUser._id,
+          purpose: "EMAIL_VERIFY",
+        });
+        await User.findByIdAndDelete(newUser._id);
+
+        return ResponseHandler.sendErrorResponse(
+          res,
+          `Could not send verification email: ${mailError.message}`,
+          "Email delivery failed",
+          500,
+        );
+      }
 
       return ResponseHandler.sendSuccessResponse(
         res,

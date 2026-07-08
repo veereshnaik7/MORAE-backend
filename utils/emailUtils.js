@@ -2,8 +2,30 @@ import nodemailer from "nodemailer";
 import configuration from "../config/configuration.js";
 
 const createTransporter = () => {
+  if (configuration.EMAIL_HOST) {
+    return nodemailer.createTransport({
+      host: configuration.EMAIL_HOST,
+      port: Number(configuration.EMAIL_PORT || 587),
+      secure: configuration.EMAIL_SECURE === "true",
+      auth: {
+        user: configuration.EMAIL_USER,
+        pass: configuration.EMAIL_PASS,
+      },
+    });
+  }
+
+  if (configuration.EMAIL_SERVICE) {
+    return nodemailer.createTransport({
+      service: configuration.EMAIL_SERVICE,
+      auth: {
+        user: configuration.EMAIL_USER,
+        pass: configuration.EMAIL_PASS,
+      },
+    });
+  }
+
   return nodemailer.createTransport({
-    service: configuration.EMAIL_SERVICE || "gmail",
+    service: "gmail",
     auth: {
       user: configuration.EMAIL_USER,
       pass: configuration.EMAIL_PASS,
@@ -46,7 +68,7 @@ export const sendMail = async (templateName, to, data = {}) => {
   const transporter = createTransporter();
 
   return transporter.sendMail({
-    from: process.env.EMAIL_FROM || process.env.EMAIL_USER,
+    from: configuration.EMAIL_FROM || configuration.EMAIL_USER,
     to,
     subject,
     html,
